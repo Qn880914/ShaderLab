@@ -1,4 +1,5 @@
-﻿Shader "Custom/LightModel_Lambert"
+﻿// Lum = c * max(0, dot(n, lightDir))
+Shader "Custom/LightModel_Lambert"
 {
 	Properties
 	{
@@ -22,7 +23,7 @@
 			struct vertexInput
 			{
 				float4 position : POSITION;
-				float3 normal : NORMAL;
+				float3 normal   : NORMAL;
 			};
 
 			struct v2f
