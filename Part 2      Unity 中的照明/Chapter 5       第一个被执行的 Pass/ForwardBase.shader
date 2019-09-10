@@ -1,0 +1,62 @@
+﻿Shader "Custom/ForwardBase"
+{
+	Properties
+	{
+		_MainTex("Main Tex(RGB)", 2D) = "white" {}
+	}
+
+		SubShader
+	{
+		Tags
+		{
+			"Queue" = "Geometry"
+			"RenderType" = "Opaque"
+			"ForceNoShadowCasting" = "False"
+			"IgnoreProjector" = "False"
+			"DisableBatching" = "False"
+			"CanUseSpriteAtlas" = "True"
+			"PreviewType" = "Cube"
+		}
+
+		Pass
+		{
+			Tags
+			{
+				"LightMode" = "ForwardBase"
+			}
+
+			CGPROGRAM
+#pragma vertex vert
+#pragma fragment frag
+
+			float4 _LightColor0;
+			
+			struct VertexInput
+			{
+				float4 position : POSITION;
+				float4 color : COLOR;
+				float3 normal : NORMAL;
+				float3 tangent : TANGENT;
+				float2 uv : TEXCOORD0;
+			};
+
+			struct v2f
+			{
+				float4 position : SV_POSITION;
+			};
+
+			v2f vert(VertexInput i)
+			{
+				v2f o;
+				o.position = UnityObjectToClipPos(i.position);
+				return o;
+			}
+
+			float4 frag(v2f i) : COLOR
+			{
+				return unity_4LightPosX0[0];//_LightColor0;// float4(0.0, 1.0, 0.0, 1.0);
+			}
+			ENDCG
+		}
+	}
+}
